@@ -178,7 +178,7 @@ def get_cell_coordinates_by_row(table_data):
 
     return cell_coordinates
 
-def apply_ocr(cell_coordinates):
+def apply_ocr(cell_coordinates,image):
     # let's OCR row by row
     data = dict()
     max_num_columns = 0
@@ -219,7 +219,7 @@ def main():
     outputs=transform_image_using_torchvision(image)
     cells = extract_cell_informations(image,outputs)
     cell_coordinates = get_cell_coordinates_by_row(cells)
-    data = apply_ocr(cell_coordinates)
+    data = apply_ocr(cell_coordinates,image)
     for row, row_data in data.items():
         print(row_data)
 
