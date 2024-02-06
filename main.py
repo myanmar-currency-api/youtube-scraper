@@ -182,7 +182,7 @@ def apply_ocr(cell_coordinates):
     # let's OCR row by row
     data = dict()
     max_num_columns = 0
-    for idx, row in enumerate(tqdm(cell_coordinates)):
+    for idx, row in enumerate(cell_coordinates):
       row_text = []
       for cell in row["cells"]:
         # crop cell out of image
