@@ -6,6 +6,7 @@ from pytube import YouTube
 # Load DL models 
 from transformers import DonutProcessor, VisionEncoderDecoderModel
 import torch
+import easyocr
 import random
 import numpy as np
 import csv
