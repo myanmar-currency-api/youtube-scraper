@@ -135,9 +135,9 @@ def transform_image_using_torchvision(image):
     # Forward Passing 
     with torch.no_grad():
         outputs = model(pixel_values)
-    print(pixel_values.shape)
+    return outputs
 
-def extract_cell_informations(image):
+def extract_cell_informations(image,outputs):
     structure_id2label = model.config.id2label
     structure_id2label[len(structure_id2label)] = "no object"
 
@@ -216,8 +216,8 @@ def main():
     download_youtube("https://www.youtube.com/watch?v=T-gAeX-9_3M")
     extract_image_from_video()
     image = draw_grid_on_image()
-    transform_image_using_torchvision(image)
-    cells = extract_cell_informations(image)
+    outputs=transform_image_using_torchvision(image)
+    cells = extract_cell_informations(image,outputs)
     cell_coordinates = get_cell_coordinates_by_row(cells)
     data = apply_ocr(cell_coordinates)
     for row, row_data in data.items():
