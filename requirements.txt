@@ -1,0 +1,9 @@
+PIL==10.2.0
+easyocr==1.7.1
+pytube==15.0.0
+session_info==1.0.0
+numpy==1.26.4
+ffmpeg-python==0.2.0
+transformers==4.37.2
+torchvision==0.17.0
+torch==2.2.0
