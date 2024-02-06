@@ -222,3 +222,5 @@ def main():
     data = apply_ocr(cell_coordinates)
     for row, row_data in data.items():
         print(row_data)
+
+main()
