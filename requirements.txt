@@ -1,4 +1,4 @@
-PIL==10.2.0
+pillow==10.2.0
 easyocr==1.7.1
 pytube==15.0.0
 session_info==1.0.0
