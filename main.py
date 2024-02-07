@@ -1,8 +1,11 @@
+import os 
 import re
 import transformers
 from PIL import Image, ImageDraw
 import ffmpeg
 from pytube import YouTube
+import json
+
 # Load DL models 
 from transformers import DonutProcessor, VisionEncoderDecoderModel
 import torch
@@ -11,6 +14,7 @@ import random
 import numpy as np
 import csv
 from torchvision import transforms
+
 
 # LOAD up all the dl models
 
@@ -210,16 +214,98 @@ def apply_ocr(cell_coordinates,image):
 
     return data
 
+def get_myanmar_datetime():
+    import datetime
+ 
+    # Specifying Myanmar timedelta and timezone 
+    # object
+    mmTimeDelta = datetime.timedelta(hours=6.5)
+    mmTZObject = datetime.timezone(mmTimeDelta,
+                                    name="MMT")
 
+    dt = datetime.datetime.now().astimezone(mmTZObject)
+    return dt
+
+
+def get_file_path():
+    import datetime
+ 
+    # Specifying Myanmar timedelta and timezone 
+    # object
+    mmTimeDelta = datetime.timedelta(hours=6.5)
+    mmTZObject = datetime.timezone(mmTimeDelta,
+                                    name="MMT")
+    
+    d1 = datetime.datetime.now().astimezone(mmTZObject)
+     
+    
+    d2 = d1.strftime("%Y-%m-%d,%H")
+     
+    
+    tod = "pm"if int(d2.split(',')[1]) >=12 else "am"
+    return f'api/{d1.strftime("%Y-%m-%d")}/{tod}.json'
+
+def write_results_to_json(data):
+    timestamp = get_myanmar_datetime().strftime("%Y-%m-%d %H:%M:%S")
+    json_data = [{
+    "timestamp": timestamp,
+    "currency": row[0],
+    "buy": row[1],
+    "sell": row[2]
+    } for _,row in data.items()]
+
+    # Save as JSON
+    with open('data.json', 'w') as json_file:
+        json.dump(json_data, json_file, indent=4)
+
+def push_to_github():
+    from github import Github
+
+    # Define GitHub repository details
+    repo_owner = 'myanmar-currency-api'
+    repo_name = 'myanmar-currency-api.github.io'
+    file_path = 'data.json'
+    file_content = ''
+
+    # GitHub personal access token with 'repo' scope
+    access_token = os.getenv("GH_ACCESS_TOKEN") 
+
+    # Create a GitHub instance using access token
+    g = Github(access_token)
+
+
+    try:
+        with open(file_path, 'r') as file:
+            file_content = file.read()
+            print("File content:")
+            print(file_content)
+    except FileNotFoundError:
+        print(f"File '{file_path}' not found.")
+    except Exception as e:
+        print(f"An error occurred while reading the file: {e}")
+
+    # Get the repository
+    repo = g.get_user(repo_owner).get_repo(repo_name)
+
+    # Create or update file
+    try:
+        contents = repo.get_contents(file_path)
+        repo.update_file(get_file_path(), "Update file", file_content, contents.sha)
+        print(f"File '{file_path}' updated successfully.")
+    except Exception as e:
+        repo.create_file(get_file_path(), "Create file", file_content)
+        print(f"File '{file_path}' created successfully.")
 
 def main():
-    download_youtube("https://www.youtube.com/watch?v=T-gAeX-9_3M")
+    download_youtube(os.getenv("YOUTUBE_URL"))
     extract_image_from_video()
     image = draw_grid_on_image()
     outputs=transform_image_using_torchvision(image)
     cells = extract_cell_informations(image,outputs)
     cell_coordinates = get_cell_coordinates_by_row(cells)
     data = apply_ocr(cell_coordinates,image)
+    write_results_to_json(data)
+
     for row, row_data in data.items():
         print(row_data)
 
