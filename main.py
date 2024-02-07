@@ -201,7 +201,7 @@ def apply_ocr(cell_coordinates,image):
       if len(row_text) > max_num_columns:
           max_num_columns = len(row_text)
 
-      data[idx] = row_text
+      data[idx] = list(map(lambda x: x.replace('v',''), row_text))
 
     print("Max number of columns:", max_num_columns)
 
