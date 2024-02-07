@@ -5,6 +5,7 @@ from PIL import Image, ImageDraw
 import ffmpeg
 from pytube import YouTube
 import json
+import time
 
 # Load DL models 
 from transformers import DonutProcessor, VisionEncoderDecoderModel
@@ -246,13 +247,15 @@ def get_file_path():
     return f'api/{d1.strftime("%Y-%m-%d")}/{tod}.json'
 
 def write_results_to_json(data):
-    timestamp = get_myanmar_datetime().strftime("%Y-%m-%d %H:%M:%S")
-    json_data = [{
-    "timestamp": timestamp,
-    "currency": row[0],
-    "buy": row[1],
-    "sell": row[2]
-    } for _,row in data.items()]
+    # Add timestamp
+    timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    epoch_time = time.time()
+    # Convert list to list of dictionaries with timestamp
+    json_data = {"data":[{
+        "currency": row[0],
+        "buy": row[1],
+        "sell": row[2]
+    } for _,row in data.items()],"epoch": epoch_time,"timestamp": timestamp}
 
     # Save as JSON
     with open('data.json', 'w') as json_file:
