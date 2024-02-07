@@ -15,7 +15,7 @@ jobs:
     steps:
       - name: Verify environment
         run : |
-          echo "Environment variable YOUTUBE_URL: ${{ UTUBE_URL }}"
+          echo "Environment variable YOUTUBE_URL: ${{ vars.UTUBE_URL }}"
       # - name: Checkout code
       #   uses: actions/checkout@v2
 
