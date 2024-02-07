@@ -247,8 +247,9 @@ def get_file_path():
     return f'api/{d1.strftime("%Y-%m-%d")}/{tod}.json'
 
 def write_results_to_json(data):
+    
     # Add timestamp
-    timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    timestamp = get_myanmar_datetime().strftime("%Y-%m-%d %H:%M:%S")
     epoch_time = time.time()
     # Convert list to list of dictionaries with timestamp
     json_data = {"data":[{
