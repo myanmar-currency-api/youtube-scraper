@@ -293,7 +293,7 @@ def push_to_github():
 
     # Create or update file
     try:
-        contents = repo.get_contents(file_path)
+        contents = repo.get_contents(get_file_path())
         repo.update_file(get_file_path(), "Update file", file_content, contents.sha)
         print(f"File '{file_path}' updated successfully.")
     except Exception as e:
