@@ -305,7 +305,7 @@ def main():
     cell_coordinates = get_cell_coordinates_by_row(cells)
     data = apply_ocr(cell_coordinates,image)
     write_results_to_json(data)
-
+    push_to_github()
     for row, row_data in data.items():
         print(row_data)
 
