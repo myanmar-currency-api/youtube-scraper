@@ -4,7 +4,9 @@ on:
   push:
     branches:
       - main
-
+env:
+  YOUTUBE_URL: $YOUTUBE_URL
+  GH_ACCESS_TOKEN: $GH_ACCESS_TOKEN
 jobs:
   run-script:
     runs-on: ubuntu-latest
