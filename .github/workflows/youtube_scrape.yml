@@ -11,11 +11,11 @@ jobs:
     environment: prod
     env:
       UTUBE_URL: ${{vars.YOUTUBE_URL}}
-      GH_ACCESS_TOKEN: secrets.GH_ACCESS_TOKEN
+      GH_ACCESS_TOKEN: ${{secrets.GH_ACCESS_TOKEN}}
     steps:
       - name: Verify environment
         run : |
-          echo "Environment variable YOUTUBE_URL: ${{ secrets.GH_ACCESS_TOKEN }}"
+          echo "Environment variable YOUTUBE_URL: $UTUBE_URL"
       # - name: Checkout code
       #   uses: actions/checkout@v2
 
