@@ -290,7 +290,15 @@ def push_to_github():
 
     # Get the repository
     repo = g.get_user(repo_owner).get_repo(repo_name)
-
+    # Write to latest path
+    latest_path='api/latest.json'
+    try:
+        contents = repo.get_contents(latest_path)
+        repo.update_file(latest_path, "Update file", file_content, contents.sha)
+        print(f"File '{latest_path}' updated successfully.")
+    except Exception as e:
+        repo.create_file(latest_path, "Create file", file_content)
+        print(f"File '{latest_path}' created successfully.")
     # Create or update file
     try:
         contents = repo.get_contents(get_file_path())
