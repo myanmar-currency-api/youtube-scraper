@@ -36,6 +36,9 @@ The script requires several Python libraries, including:
    
 7. **OCR and Data Extraction**: Optical character recognition (OCR) is performed on each identified table cell to extract text information.
 
+### License
+This script is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+
 ### Additional Notes
 - The script assumes a specific structure of the table in the video frames and relies on hard-coded grid coordinates. Any changes in the table layout may require adjustments to the grid drawing process.
 - The deep learning models used in the script are pretrained models for table structure recognition (`TableTransformerForObjectDetection`) and object detection. They are expected to perform well on similar tasks but may not generalize perfectly to all scenarios.
