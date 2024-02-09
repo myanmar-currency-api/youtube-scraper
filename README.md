@@ -6,6 +6,9 @@ Unofficial Youtube Scraper of Currency Update News from DVB
 ### Overview
 This Python script is designed to extract currency exchange rate data from a video source, process it using various deep learning models, perform optical character recognition (OCR) to extract text information, and then save the results to a JSON file. Finally, it pushes the JSON data to a GitHub repository.
 
+### Motivation
+There exists inconsistency between the currency exchange rates displayed on Google and the actual rates of Myanmar Currency. To address this issue and provide accurate and up-to-date currency exchange rate data, this script utilizes deep learning models and optical character recognition (OCR) to extract currency information from video sources. By leveraging advanced technologies, the script aims to offer reliable exchange rate data for developers and users.
+
 ### Dependencies
 The script requires several Python libraries, including:
 - `os`: For interacting with the operating system.
