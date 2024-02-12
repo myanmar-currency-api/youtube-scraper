@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     environment: prod
     env:
-      YOUTUBE_URL: https://youtube.com/watch?si=3oYErvw9h1RNk2Uc&v=Gvrz3wsWdIM&feature=youtu.be
+      YOUTUBE_URL: https://youtube.com/watch?si=_GVs_TRBgC-LjAUc&v=aU4UzmwvUc0&feature=youtu.be
       GH_ACCESS_TOKEN: ${{secrets.GH_ACCESS_TOKEN}}
     steps:
       - name: Verify environment
