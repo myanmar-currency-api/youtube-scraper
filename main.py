@@ -243,7 +243,7 @@ def get_file_path():
     d2 = d1.strftime("%Y-%m-%d,%H")
      
     
-    tod = "pm"if int(d2.split(',')[1]) >12 else "am"
+    tod = "latest"
     return f'api/{d1.strftime("%Y-%m-%d")}/{tod}.json'
 
 def write_results_to_json(data):
