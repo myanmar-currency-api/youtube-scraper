@@ -244,7 +244,7 @@ def get_file_path():
      
     
     tod = "latest"
-    return f'api/{d1.strftime("%Y-%m-%d")}/{tod}.json'
+    return f'api/{d1.strftime("%Y")}/{d1.strftime("%m")}/{d1.strftime("%d")}/{tod}.json'
 
 def write_results_to_json(data):
     
