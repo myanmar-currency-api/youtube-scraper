@@ -29,6 +29,15 @@ model.to(device)
 
 print(device)
 
+def read_data_from_video_meta_json():
+    video_id = ''
+    with open('video_meta.json', 'r') as file:
+        content = file.read()
+        content = json.loads(content)
+        print("File content:")
+        print(content)
+        video_id = content.get('video_id')
+    return f'https://youtu.be/{video_id}'
 
 def download_youtube(url):
     yt = YouTube(url)
@@ -309,7 +318,8 @@ def push_to_github():
         print(f"File '{file_path}' created successfully.")
 
 def main():
-    download_youtube(os.getenv("YOUTUBE_URL"))
+    video_url=read_data_from_video_meta_json()
+    download_youtube(video_url)
     extract_image_from_video()
     image = draw_grid_on_image()
     outputs=transform_image_using_torchvision(image)
