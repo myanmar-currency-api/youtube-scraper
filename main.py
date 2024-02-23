@@ -304,7 +304,7 @@ def take_html_screenshot_opengraph():
     options.add_argument('--no-sandbox')
     options.add_argument("--hide-scrollbars")
     # options.binary_location = "/usr/bin/google-chrome"
-    options.add_argument("executable_path='/usr/bin/chromium-browser'")
+    # options.add_argument("executable_path='/usr/bin/chromium-browser'")
 
     driver = webdriver.Chrome(options=options)
     driver.get(f'file:///{os.getcwd()}/ss_template.html')
