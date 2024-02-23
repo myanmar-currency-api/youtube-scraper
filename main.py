@@ -278,17 +278,27 @@ def generate_screenshot_html_opengraph():
     arr_rows = []
     with open('template.html', 'r') as file:
         html_content = file.read()
+        
+    with open('home_template.html', 'r') as home_template:
+        home_content = home_template.read()
+
     with open('data.json', 'r') as file:
         content = file.read()  
         json_content = json.loads(content)
         json_content = json_content.get('data')
+    
     for item in json_content:
         arr_rows.append(f'<tr><td class="border border-gray-300 px-4 py-2 text-center">{item.get("currency")}</td> <td class="border border-gray-300 px-4 py-2 text-center">{item.get("buy")}</td><td class="border border-gray-300 px-4 py-2 text-center">{item.get("sell")}</td><tr>')
 
     html_content = str(html_content).replace('SSR_TIMESTAMP',get_myanmar_datetime().strftime("%Y-%m-%d %H:%M:%S")).replace('SSR_DYNAMIC_RATE',''.join(arr_rows))
 
+    home_content = str(home_content).replace('SSR_TIMESTAMP',get_myanmar_datetime().strftime("%Y-%m-%d %H:%M:%S")).replace('SSR_DYNAMIC_RATE',''.join(arr_rows))
+
     with open('ss_template.html','w') as ss_html:
         ss_html.write(html_content)
+
+    with open('index.html','w') as home_html:
+        home_html.write(home_content)
 
 def take_html_screenshot_opengraph():
     from selenium import webdriver
@@ -379,6 +389,24 @@ def push_to_github():
         repo.create_file('og-header.png', "Create file", file_content)
         print(f"File og-header.png created successfully.")
 
+# Update index html to repo
+    try:
+        with open("index.html", 'r') as screenshot_file:
+            file_content = screenshot_file.read()
+            # print("File content:")
+            # print(screenshot_file)
+    except FileNotFoundError:
+        print(f"File index.html not found.")
+    except Exception as e:
+        print(f"An error occurred while reading the file: {e}")
+# push screen shot
+    try:
+        contents = repo.get_contents('index.html')
+        repo.update_file('index.html', "Update file", file_content, contents.sha)
+        print(f"File 'index.html' updated successfully.")
+    except Exception as e:
+        repo.create_file('index.html', "Create file", file_content)
+        print(f"File index.html created successfully.")
 
 def main():
     video_url=read_data_from_video_meta_json()

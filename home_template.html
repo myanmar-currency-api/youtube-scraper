@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- HTML Meta Tags -->
+    <title>Myanmar Currency Exchange Rate api</title>
+    <meta
+      name="description"
+      content="Myanmar Currency Exchange Rate API provides real-time exchange rate data for various currencies against the Myanmar Kyat (MMK)."
+    />
+
+    <!-- Facebook Meta Tags -->
+    <meta property="og:url" content="https://myanmar-currency-api.github.io" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Myanmar Currency Exchange Rate api" />
+    <meta
+      property="og:description"
+      content="Myanmar Currency Exchange Rate API provides real-time exchange rate data for various currencies against the Myanmar Kyat (MMK)."
+    />
+    <meta
+      property="og:image"
+      content="https://myanmar-currency-api.github.io/og-header.png"
+    />
+
+    <!-- Twitter Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta property="twitter:domain" content="myanmar-currency-api.github.io" />
+    <meta
+      property="twitter:url"
+      content="https://myanmar-currency-api.github.io"
+    />
+    <meta name="twitter:title" content="Myanmar Currency Exchange Rate api" />
+    <meta
+      name="twitter:description"
+      content="Myanmar Currency Exchange Rate API provides real-time exchange rate data for various currencies against the Myanmar Kyat (MMK)."
+    />
+    <meta
+      name="twitter:image"
+      content="https://myanmar-currency-api.github.io/og-header.png"
+    />
+
+    <!-- Meta Tags Generated via https://www.opengraph.xyz -->
+    <!-- Tailwind CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-VK21DW5DTL"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-VK21DW5DTL');
+</script>
+  </head>
+
+  <body class="bg-gray-100 font-sans">
+    <nav class="bg-blue-500 p-4 fixed w-full">
+      <div class="container mx-auto flex justify-between items-center">
+        <div>
+          <a href="#" class="text-white font-bold" id="homeLink">Home</a>
+          <a href="#exchangeRateHistory" class="text-white font-bold ml-4"
+            >History</a
+          >
+          <a href="#apiDocs" class="text-white font-bold ml-4">API Docs</a>
+          <a href="#aboutUs" class="text-white font-bold ml-4">About</a>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container mx-auto py-8" id="exchangeRate">
+      <div class="bg-white p-6 rounded-lg shadow-lg">
+        <h2 class="text-2xl font-bold mb-4">Latest Currency Exchange Rate</h2>
+        <table class="w-full border-collapse border border-gray-300">
+          <thead>
+            <tr>
+              <th class="border border-gray-300 px-4 py-2 text-center">
+                Currency
+              </th>
+              <th class="border border-gray-300 px-4 py-2 text-center">Buy</th>
+              <th class="border border-gray-300 px-4 py-2 text-center">Sell</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Data will be dynamically inserted here -->
+            SSR_DYNAMIC_RATE
+          </tbody>
+        </table>
+
+        <p class="mt-4">Data as of <span id="timestamp"></span></p>
+        <p class="mt-2 text-red-500">
+          Actual prices may vary from time to time.
+        </p>
+      </div>
+    </div>
+    <section
+      id="exchangeRateHistory"
+      class="bg-white rounded-lg shadow-lg container mx-auto py-8"
+    >
+      <!-- <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="bg-gray-200 p-4">Column 1</div>
+        <div class="bg-gray-200 p-4">Column 2</div>
+      </div> -->
+
+      <h2 class="text-2xl font-bold pl-6">Exchange Rate History</h2>
+      <div class="grid grid-cols-1 md:grid-cols-1 gap-4">
+        <div class="bg-white p-6 rounded-lg">
+          <h4 class="text-xl font-bold">Average Buy & Sell Price</h4>
+          <canvas
+            id="averageExchangeRateChart"
+            width="1200"
+            height="400"
+          ></canvas>
+          <!-- <canvas id="buyExchangeRateChart" width="800" height="400"></canvas> -->
+        </div>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="bg-white p-6 rounded-lg">
+          <h4 class="text-xl font-bold">Buy Price</h4>
+          <canvas id="buyExchangeRateChart" width="800" height="400"></canvas>
+        </div>
+        <div class="bg-white p-6 rounded-lg">
+          <h4 class="text-xl font-bold">Sell Price</h4>
+          <canvas id="sellExchangeRateChart" width="800" height="400"></canvas>
+        </div>
+      </div>
+      <!-- <div class="bg-white p-6 rounded-lg shadow-lg">
+       
+      </div> -->
+    </section>
+    <!-- API Docs Section -->
+    <section id="apiDocs" class="container mx-auto py-8">
+      <div class="bg-white p-6 rounded-lg shadow-lg">
+        <h2 class="text-2xl font-bold mb-4">API Documentation</h2>
+        <!-- Content for API Docs goes here -->
+        <div id="apiDocsContent">
+          <div class="container-lg px-3 my-5 markdown-body">
+            <h1>
+              <a href="https://myanmar-currency-api.github.io/"
+                >myanmar-currency-api.github.io</a
+              >
+            </h1>
+
+            <h2
+              class="text-2xl font-bold my-4"
+              id="myanmar-currency-api-documentation"
+            >
+              Myanmar Currency API Documentation
+            </h2>
+
+            <h3 class="text-xl font-bold my-2" id="introduction">
+              Introduction
+            </h3>
+            <p class="my-4">
+              The Myanmar Currency exchange rate API provides real-time exchange
+              rate data for various currencies against the Myanmar Kyat (MMK).
+              This API is suitable for developers who need accurate and
+              up-to-date currency exchange information for their applications.
+            </p>
+
+            <h3 class="text-xl font-bold my-2" id="accessing-the-api">
+              Accessing the API
+            </h3>
+            <p class="my-4">
+              The API can be accessed through a simple HTTP GET request to the
+              following endpoint:
+            </p>
+            <div class="bg-gray-100 p-4 rounded-md my-4">
+              <code class="text-gray-900"
+                >https://myanmar-currency-api.github.io/api/latest.json</code
+              >
+            </div>
+
+            <h3 class="text-xl font-bold my-2" id="response-format">
+              Response Format
+            </h3>
+            <p class="my-4">
+              The API response is in JSON format and contains the following
+              fields:
+            </p>
+
+            <ul class="list-disc list-inside my-4">
+              <li class="my-2">
+                <code class="text-gray-900">data</code>: An array of objects,
+                each representing a currency exchange rate. Each object has the
+                following attributes:
+                <ul class="list-disc list-inside my-2">
+                  <li class="my-1">
+                    <code class="text-gray-900">currency</code>: The currency
+                    code (e.g., USD, EUR, SGD).
+                  </li>
+                  <li class="my-1">
+                    <code class="text-gray-900">buy</code>: The buying rate of
+                    the currency against Myanmar Kyat.
+                  </li>
+                  <li class="my-1">
+                    <code class="text-gray-900">sell</code>: The selling rate of
+                    the currency against Myanmar Kyat.
+                  </li>
+                </ul>
+              </li>
+              <li class="my-2">
+                <code class="text-gray-900">epoch</code>: UNIX timestamp
+                indicating the time when the data was last updated.
+              </li>
+              <li class="my-2">
+                <code class="text-gray-900">timestamp</code>: Human-readable
+                date and time of the last update in the format “YYYY-MM-DD
+                HH:MM:SS”.
+              </li>
+            </ul>
+
+            <h3 class="text-xl font-bold my-2" id="example-response">
+              Example Response
+            </h3>
+            <div class="bg-gray-100 p-4 rounded-md my-4">
+              <code class="text-gray-900">
+                { "data": [ { "currency": "USD", "buy": "3500", "sell": "3450"
+                }, { "currency": "EUR", "buy": "3807", "sell": "3730" }, {
+                "currency": "SGD", "buy": "2595", "sell": "2545" }, {
+                "currency": "MYR", "buy": "749", "sell": "734" }, { "currency":
+                "CNY", "buy": "490.00", "sell": "480.00" }, { "currency": "THB",
+                "buy": "99.00", "sell": "97.00" }, { "currency": "JPN", "buy":
+                "23.79", "sell": "23.31" } ], "epoch": 1707491029.7016091,
+                "timestamp": "2024-02-09 21:33:49" }
+              </code>
+            </div>
+
+            <h3 class="text-xl font-bold my-2" id="data-source">Data Source</h3>
+            <p class="my-4">
+              The exchange rate data provided in this API is sourced from
+              reputable financial markets and is periodically updated.
+              Additionally, news updates and market analysis from the DVB TV
+              News YouTube channel are considered as supplementary sources to
+              ensure accuracy and relevance.
+            </p>
+
+            <h3 class="text-xl font-bold my-2" id="rate-limits">Rate Limits</h3>
+            <p class="my-4">
+              Currently, there are no rate limits imposed on API requests.
+              However, please use the API responsibly and avoid excessive
+              polling to prevent unnecessary load on the server.
+            </p>
+
+            <h3 class="text-xl font-bold my-2" id="data-accuracy-and-ambiguity">
+              Data Accuracy and Ambiguity
+            </h3>
+            <p class="my-4">
+              While we strive to provide accurate and up-to-date exchange rate
+              data, occasional discrepancies or ambiguities may arise due to
+              rapid market fluctuations or data processing issues. In such
+              cases, we encourage users to cross-reference information with
+              trusted sources, including the DVB TV News YouTube channel, for
+              clarification and verification.
+            </p>
+
+            <h3 class="text-xl font-bold my-2" id="support-and-feedback">
+              Support and Feedback
+            </h3>
+            <p class="my-4">
+              For any questions, issues, or feedback regarding the Myanmar
+              Currency API, please open an issue on the GitHub repository:
+              <a href="https://github.com/myanmar-currency-api"
+                >Myanmar Currency API GitHub Repository</a
+              >.
+            </p>
+
+            <h3 class="text-xl font-bold my-2" id="terms-of-use">
+              Terms of Use
+            </h3>
+            <p class="my-4">
+              By using the Myanmar Currency API, you agree to abide by the terms
+              of use outlined in the LICENSE file available in the repository.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- About Us Section -->
+    <section id="aboutUs" class="container mx-auto py-8">
+      <div class="bg-white p-6 rounded-lg shadow-lg">
+        <h2 class="text-2xl font-bold mb-4">About Us</h2>
+        <p class="my-4">
+          The Myanmar Currency Info website was created to address the issue of
+          data inconsistency between the official exchange rates provided by the
+          Central Bank of Myanmar and the actual exchange rates observed in the
+          market. Due to various factors such as demand-supply dynamics,
+          speculative activities, and regulatory controls, there often exists a
+          disparity between the official rates and the rates at which currencies
+          are traded in the market.
+        </p>
+        <p class="my-4">
+          Our goal is to provide users with accurate and up-to-date information
+          on currency exchange rates, sourced from reliable financial markets
+          and supplemented with analysis from reputable sources. By offering
+          transparent and accessible data, we aim to empower individuals and
+          businesses to make informed decisions when engaging in currency
+          transactions.
+        </p>
+        <p class="my-4">
+          We are committed to maintaining the integrity and reliability of our
+          data, and welcome feedback and suggestions from our users to
+          continuously improve our services. For inquiries or assistance, please
+          don't hesitate to reach out to us via the contact information provided
+          on this website.
+        </p>
+      </div>
+    </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/moment@2.27.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-moment@0.1.1"></script>
+    <!-- JavaScript to fetch and display currency data -->
+    <script>
+      // Reload the page when the "Home" link is clicked
+      document
+        .getElementById("homeLink")
+        .addEventListener("click", function (event) {
+          event.preventDefault(); // Prevent default link behavior
+          window.location.href = "/"; // Reload the page
+        });
+
+      // Function to update the title with individual exchange rate
+      function updateTitleWithExchangeRate(currency) {
+        document.title = `${currency.currency} - Buy: ${currency.buy}, Sell: ${currency.sell}`;
+      }
+
+      // Fetch currency data from the API
+      fetch("https://myanmar-currency-api.github.io/api/latest.json")
+        .then((response) => response.json())
+        .then((data) => {
+          // populate table
+          const timestamp = data.timestamp;
+          document.getElementById("timestamp").textContent = timestamp;
+          const currencies = data.data;
+          currencies.forEach((currency) => {
+            
+            // Update title with individual exchange rate
+            updateTitleWithExchangeRate(currency);
+          });
+          // Set interval to continuously update title with individual exchange rates
+          const intervalId = setInterval(() => {
+            const randomCurrencyIndex = Math.floor(
+              Math.random() * currencies.length
+            );
+            updateTitleWithExchangeRate(currencies[randomCurrencyIndex]);
+          }, 5000); // Update every 5 seconds
+
+          // Clear interval when the page is unloaded (user exits the page)
+          window.addEventListener("unload", () => {
+            clearInterval(intervalId);
+          });
+        })
+        .catch((error) => console.error("Error fetching data:", error));
+    </script>
+    <script>
+      // Fetch data from API endpoints
+      var startDate = moment("2024-02-07"); // Example start date
+      var endDate = moment(new Date()).subtract(1, "days"); // Example end date
+
+      // Function to find all weekdays within the date range
+      function findWeekdaysInRange(startDate, endDate) {
+        const weekdays = [];
+        let currentDate = moment(startDate);
+
+        // Loop through each date in the range
+        while (currentDate.isSameOrBefore(endDate)) {
+          // Check if the current date is a weekday (Monday to Friday)
+          if (currentDate.isoWeekday() >= 1 && currentDate.isoWeekday() <= 5) {
+            // If it's a weekday, add it to the weekdays array
+            weekdays.push(currentDate.format("YYYY/MM/DD"));
+          }
+          // Move to the next day
+          currentDate.add(1, "days");
+        }
+        return weekdays;
+      }
+
+      // Draw Chart Method
+
+      function DrawChart(labels = [], datasets = [], canvasSelector, scales) {
+        const chartData = {
+          labels,
+
+          datasets,
+        };
+
+        let ctx = document.querySelector(canvasSelector).getContext("2d");
+
+        let chart = new Chart(ctx, {
+          type: "line",
+          data: chartData,
+
+          options: {
+            scales: scales,
+          },
+        });
+      }
+
+      // Call the function and log the result
+      var weekdaysInRange = findWeekdaysInRange(startDate, endDate);
+      var fetchEndpoints = weekdaysInRange
+        .slice(-30)
+        .map((i) =>
+          fetch(`https://myanmar-currency-api.github.io/api/${i}/latest.json`)
+        );
+      Promise.all(fetchEndpoints)
+        .then((responses) =>
+          Promise.all(responses.map((response) => response.json()))
+        )
+        .then((data) => {
+          // Merge data into a single dataset
+
+          const mergedData = [];
+          data.forEach((dayData) => {
+            dayData.data.forEach((currency) => {
+              const existingCurrency = mergedData.find(
+                (item) => item.currency === currency.currency
+              );
+              if (existingCurrency) {
+                existingCurrency.data.push({
+                  timestamp: dayData.timestamp,
+                  buy: parseFloat(currency.buy),
+                  sell: parseFloat(currency.sell),
+                });
+              } else {
+                mergedData.push({
+                  currency: currency.currency,
+                  data: [
+                    {
+                      timestamp: dayData.timestamp,
+                      buy: parseFloat(currency.buy),
+                      sell: parseFloat(currency.sell),
+                    },
+                  ],
+                });
+              }
+            });
+          });
+
+          // Extract weekdays' data only
+          const weekdaysData = mergedData.map((currency) => ({
+            currency: currency.currency,
+            data: currency.data.filter((item) => {
+              const timestamp = new Date(item.timestamp);
+              const dayOfWeek = timestamp.getDay();
+              return dayOfWeek !== 0 && dayOfWeek !== 6; // Filter out weekends
+            }),
+          }));
+          const labels = weekdaysData.map((currency) =>
+            currency.data.map((item) => {
+              return new Date(item.timestamp);
+            })
+          )[0];
+
+          // Prepare datasets for Chart.js
+          const buyDataSets = weekdaysData.map((currency) => ({
+            label: currency.currency,
+            borderColor: getRandomColor(),
+            data: currency.data.map((item) => item.buy),
+            hidden: !(currency.currency === "USD"),
+          }));
+
+          const sellDataSets = weekdaysData.map((currency) => ({
+            label: currency.currency,
+            borderColor: getRandomColor(),
+            data: currency.data.map((item) => item.sell),
+            hidden: !(currency.currency === "USD"),
+          }));
+
+          const averageDataSets = weekdaysData.map((currency) => ({
+            label: currency.currency,
+            borderColor: getRandomColor(),
+            data: currency.data.map((item) => (item.sell + item.buy) / 2),
+            hidden: !(currency.currency === "USD"),
+          }));
+
+          DrawChart(labels, buyDataSets, "#buyExchangeRateChart", {
+            x: {
+              type: "time",
+              time: {
+                unit: "day",
+              },
+              ticks: {
+                source: "auto",
+              },
+            },
+            y: {
+              title: {
+                display: true,
+                text: "Exchange Rate Buy",
+              },
+            },
+          });
+
+          DrawChart(labels, sellDataSets, "#sellExchangeRateChart", {
+            x: {
+              type: "time",
+              time: {
+                unit: "day",
+              },
+              ticks: {
+                source: "auto",
+              },
+            },
+            y: {
+              title: {
+                display: true,
+                text: "Exchange Rate Sell",
+              },
+            },
+          });
+
+          DrawChart(labels, averageDataSets, "#averageExchangeRateChart", {
+            x: {
+              type: "time",
+              time: {
+                unit: "day",
+              },
+              ticks: {
+                source: "auto",
+              },
+            },
+            y: {
+              title: {
+                display: true,
+                text: "Exchange Average Buy & Sell",
+              },
+            },
+          });
+        })
+        .catch((error) => console.error("Error fetching data:", error));
+      // Create Chart.js instance
+
+      // Function to generate random color
+      function getRandomColor() {
+        const letters = "0123456789ABCDEF";
+        let color = "#";
+        for (let i = 0; i < 6; i++) {
+          color += letters[Math.floor(Math.random() * 16)];
+        }
+        return color;
+      }
+    </script>
+  </body>
+</html>
