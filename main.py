@@ -362,12 +362,12 @@ def push_to_github():
         print(f"File '{file_path}' created successfully.")
 # OG Screenshot upload to repo
     try:
-        with open("screenshot.png", 'r') as file:
-            file_content = file.read()
+        with open("screenshot.png", 'r') as screenshot_file:
+            file_content = screenshot_file.read()
             print("File content:")
-            print(file_content)
+            # print(screenshot_file)
     except FileNotFoundError:
-        print(f"File '{file_path}' not found.")
+        print(f"File screenshot.png not found.")
     except Exception as e:
         print(f"An error occurred while reading the file: {e}")
 # push screen shot
