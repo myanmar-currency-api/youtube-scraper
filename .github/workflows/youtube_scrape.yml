@@ -14,14 +14,14 @@ jobs:
       GH_ACCESS_TOKEN: ${{secrets.GH_ACCESS_TOKEN}}
     steps:
       - name: Verify environment
-        run : |
+        run: |
           echo "Environment variable YOUTUBE_URL: $YOUTUBE_URL "
           echo "Environment variable GH_ACCESS_TOKEN: $GH_ACCESS_TOKEN"
       - name: Checkout code
         uses: actions/checkout@v2
 
       - name: Install FFmpeg
-        run: sudo apt-get update -y && sudo apt-get install ffmpeg -y
+        run: sudo apt-get update -y && sudo apt-get install ffmpeg chromium-driver chromium-browser libglib2.0-0 libnss3 libgconf-2-4 libfontconfig1 -y
 
       - name: Set up Python
         uses: actions/setup-python@v2

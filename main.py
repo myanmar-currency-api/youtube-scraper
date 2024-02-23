@@ -271,6 +271,49 @@ def write_results_to_json(data):
     with open('data.json', 'w') as json_file:
         json.dump(json_data, json_file, indent=4)
 
+def generate_screenshot_html_opengraph():
+    import json
+    html_content = ''
+    json_content = ''
+    arr_rows = []
+    with open('template.html', 'r') as file:
+        html_content = file.read()
+    with open('data.json', 'r') as file:
+        content = file.read()  
+        json_content = json.loads(content)
+        json_content = json_content.get('data')
+    for item in json_content:
+        arr_rows.append(f'<tr><td class="border border-gray-300 px-4 py-2 text-center">{item.get("currency")}</td> <td class="border border-gray-300 px-4 py-2 text-center">{item.get("buy")}</td><td class="border border-gray-300 px-4 py-2 text-center">{item.get("sell")}</td><tr>')
+
+    html_content = str(html_content).replace('SSR_TIMESTAMP',get_myanmar_datetime().strftime("%Y-%m-%d %H:%M:%S")).replace('SSR_DYNAMIC_RATE',''.join(arr_rows))
+
+    with open('ss_template.html','w') as ss_html:
+        ss_html.write(html_content)
+
+def take_html_screenshot_opengraph():
+    from selenium import webdriver
+    from time import sleep
+    from selenium.webdriver.chrome.options import Options
+    from selenium.webdriver.common.keys import Keys
+    import os
+
+    options = Options()
+    options.add_argument('--headless=new')
+    options.add_argument('--disable-gpu')
+    options.add_argument('--disable-dev-shm-usage')
+    options.add_argument('--no-sandbox')
+    options.add_argument("--hide-scrollbars")
+    # options.binary_location = "/usr/bin/google-chrome"
+    options.add_argument("executable_path='/usr/bin/chromium-browser'")
+
+    driver = webdriver.Chrome(options=options)
+    driver.get(f'file:///{os.getcwd()}/ss_template.html')
+    sleep(1)
+
+    driver.get_screenshot_as_file("screenshot.png")
+    driver.quit()
+    print("ScreenShot complete...")
+
 def push_to_github():
     from github import Github
 
@@ -297,6 +340,7 @@ def push_to_github():
     except Exception as e:
         print(f"An error occurred while reading the file: {e}")
 
+
     # Get the repository
     repo = g.get_user(repo_owner).get_repo(repo_name)
     # Write to latest path
@@ -316,6 +360,25 @@ def push_to_github():
     except Exception as e:
         repo.create_file(get_file_path(), "Create file", file_content)
         print(f"File '{file_path}' created successfully.")
+# OG Screenshot upload to repo
+    try:
+        with open("screenshot.png", 'r') as file:
+            file_content = file.read()
+            print("File content:")
+            print(file_content)
+    except FileNotFoundError:
+        print(f"File '{file_path}' not found.")
+    except Exception as e:
+        print(f"An error occurred while reading the file: {e}")
+# push screen shot
+    try:
+        contents = repo.get_contents('og-header.png')
+        repo.update_file('og-header.png', "Update file", file_content, contents.sha)
+        print(f"File 'og-header.png' updated successfully.")
+    except Exception as e:
+        repo.create_file('og-header.png', "Create file", file_content)
+        print(f"File og-header.png created successfully.")
+
 
 def main():
     video_url=read_data_from_video_meta_json()
@@ -327,6 +390,8 @@ def main():
     cell_coordinates = get_cell_coordinates_by_row(cells)
     data = apply_ocr(cell_coordinates,image)
     write_results_to_json(data)
+    generate_screenshot_html_opengraph()
+    take_html_screenshot_opengraph()
     push_to_github()
     for row, row_data in data.items():
         print(row_data)
