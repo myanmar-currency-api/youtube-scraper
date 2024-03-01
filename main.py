@@ -6,6 +6,7 @@ import ffmpeg
 from pytube import YouTube
 import json
 import time
+import re
 
 # Load DL models 
 from transformers import DonutProcessor, VisionEncoderDecoderModel
@@ -263,8 +264,8 @@ def write_results_to_json(data):
     # Convert list to list of dictionaries with timestamp
     json_data = {"data":[{
         "currency": row[0],
-        "buy": str(row[1]).replace('C',''),
-        "sell": str(row[2]).replace('C','')
+        "buy":  re.sub(r'[a-zA-Z]', '',str(row[1])),
+        "sell": re.sub(r'[a-zA-Z]', '',str(row[2])),
     } for _,row in data.items()],"epoch": epoch_time,"timestamp": timestamp}
 
     # Save as JSON
